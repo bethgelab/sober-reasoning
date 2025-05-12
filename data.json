@@ -456,19 +456,6 @@
     "olympiad": "70.5±0.9"
   },
   {
-    "name": "LIMR",
-    "organization": "GAIR",
-    "basedOn": "Qwen2.5 Math 7B (RL)",
-    "paperLink": "https://github.com/GAIR-NLP/LIMR/blob/master/limr.pdf",
-    "paperText": "",
-    "aime24": "30.7±3.2",
-    "aime25": "7.8±3.3",
-    "amc23": "62.2±3.4",
-    "math500": "76.5±0.4",
-    "minerva": "34.9±1.3",
-    "olympiad": "39.3±0.9"
-  },
-  {
     "name": "Sky-T1-32B-Preview",
     "organization": "NovaSky-AI",
     "basedOn": "Qwen2.5 32B (SFT)",
