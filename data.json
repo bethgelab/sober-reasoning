@@ -106,7 +106,7 @@
     "baseModel": "HuggingFaceTB/SmolLM2-1.7B",
     "paperLink": "",
     "paperText": "",
-    "technique": "SFT+DPO",
+    "technique": "RL",
     "aime24": "0.3±1.1",
     "aime25": "0.3±1.1",
     "amc23": "4.0±2.1",
