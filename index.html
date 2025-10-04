@@ -232,6 +232,14 @@
           Clear Highlights
         </button>
       </div>
+      <button
+  id="exportTop5"
+  class="px-3 py-2 rounded text-sm border shadow-sm flex items-center gap-2 bg-blue-50 text-blue-800 border-blue-400 hover:bg-blue-100 transition-all"
+>
+  <i class="fas fa-file-pdf"></i>
+  Export Top 5 as PDF
+</button>
+
     </div>
 
     <div class="overflow-x-auto shadow-md rounded-lg">
@@ -517,6 +525,188 @@
         $('.technique-filter-btn').removeClass('bg-burgundy-600 text-white').addClass('bg-white text-burgundy-600 border-burgundy-600');
         $(this).removeClass('bg-white text-burgundy-600 border-burgundy-600').addClass('bg-burgundy-600 text-white');
       });
+
+ $('#exportTop5').on('click', function() {
+  const allData = [];
+  table.rows({ order: 'current', search: 'applied' }).every(function() {
+    allData.push(this.data());
+  });
+
+  // Calculate best scores for each benchmark column (indices 5-10)
+  const bestScores = {};
+  for (let col = 5; col <= 10; col++) {
+    let best = -1;
+    allData.forEach(row => {
+      const score = parseFloat((row[col] || "0").split("±")[0]);
+      if (!isNaN(score) && score > best) {
+        best = score;
+      }
+    });
+    bestScores[col] = best;
+  }
+
+  // Define conference models to highlight
+  const conferenceModels = [
+    'SimpleRL-Zoo',
+    'LIMO',
+    'L1',
+    'SmolLM2',
+    'Efficient_CoT_DeepSeek-R1-Distill-Qwen-7B',
+    'Olmo-2',
+    'Llama-3.1-Tulu-3.1-8B	',
+    'DPO VP'
+  ];
+
+  // Function to check if a model should be highlighted
+  function isConferenceModel(modelName) {
+    return conferenceModels.some(pattern => 
+      modelName.toLowerCase().includes(pattern.toLowerCase())
+    );
+  }
+
+  const printWindow = window.open('', '', 'width=1200,height=800');
+  printWindow.document.write(`
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+        
+        body {
+          font-family: 'Inter', sans-serif;
+          padding: 20px;
+          background: white;
+        }
+        
+        table {
+          width: 100%;
+          border-collapse: collapse;
+          font-size: 9.5pt;
+        }
+        
+        th {
+          background: #7D2E46;
+          color: white;
+          padding: 8px 6px;
+          text-align: left;
+          font-weight: 600;
+          border: 1px solid #5F2335;
+          font-size: 8pt;
+        }
+        
+        td {
+          padding: 6px 6px;
+          border: 1px solid #ddd;
+        }
+        
+        /* Narrow columns for Model and Base Model */
+        th:nth-child(1), td:nth-child(1) {
+          width: 15%;
+        }
+        
+        th:nth-child(3), td:nth-child(3) {
+          width: 15%;
+        }
+        
+        tr:nth-child(even) {
+          background: #fafafa;
+        }
+        
+        .model-name {
+          font-weight: 600;
+        }
+        
+        /* Best score highlighting */
+        .best-score {
+          font-weight: 600;
+          color: #7D2E46;
+          background-color: rgba(125, 46, 70, 0.05);
+          padding: 2px 4px;
+          border-radius: 3px;
+        }
+        
+        /* Conference model highlighting */
+        .conference-model {
+          background-color: #FEF3C7 !important; /* Light yellow */
+          border-left: 3px solid #F59E0B; /* Orange border */
+        }
+        
+        @media print {
+          body { margin: 0; }
+          @page { size: landscape; }
+        }
+      </style>
+    </head>
+    <body>
+
+      <p style="margin-bottom: 10px; font-size: 9pt; color: #6B7280;">
+        <span style="display: inline-block; width: 12px; height: 12px; background: #FEF3C7; border: 1px solid #F59E0B; margin-right: 5px; vertical-align: middle;"></span>
+        Conference models highlighted
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th>Organization</th>
+            <th>Base Model</th>
+            <th>Method</th>
+            <th>AIME'24</th>
+            <th>AIME'25</th>
+            <th>AMC'23</th>
+            <th>MATH500</th>
+            <th>Minerva</th>
+            <th>OlympiadBench</th>
+          </tr>
+        </thead>
+        <tbody>
+  `);
+
+  allData.forEach(row => {
+    const modelName = row[0];
+    const isConference = isConferenceModel(modelName);
+    
+    // Check if each score is the best and wrap with span if so
+    const scores = [5, 6, 7, 8, 9, 10].map(col => {
+      const scoreValue = row[col];
+      const numericScore = parseFloat((scoreValue || "0").split("±")[0]);
+      const isBest = !isNaN(numericScore) && numericScore === bestScores[col];
+      
+      if (isBest) {
+        return `<span class="best-score">${scoreValue}</span>`;
+      }
+      return scoreValue;
+    });
+
+    printWindow.document.write(`
+      <tr${isConference ? ' class="conference-model"' : ''}>
+        <td class="model-name">${modelName}</td>
+        <td>${row[1]}</td>
+        <td>${row[2]}</td>
+        <td>${row[3]}</td>
+        <td>${scores[0]}</td>
+        <td>${scores[1]}</td>
+        <td>${scores[2]}</td>
+        <td>${scores[3]}</td>
+        <td>${scores[4]}</td>
+        <td>${scores[5]}</td>
+      </tr>
+    `);
+  });
+
+  printWindow.document.write(`
+        </tbody>
+      </table>
+    </body>
+    </html>
+  `);
+  
+  printWindow.document.close();
+  printWindow.focus();
+  
+  setTimeout(() => {
+    printWindow.print();
+  }, 250);
+});
     }
   </script>
 </body>
