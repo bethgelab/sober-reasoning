@@ -1,12 +1,11 @@
 # 🧠 Sober Reasoning: Evaluation Code
-> 🚨 Update 12/05/2025: 32B models added to the leaderboard, more to come soon! 
 
 
 This repository hosts evaluation code from our paper:
 
 **"A Sober Look at Progress in Language Model Reasoning: Pitfalls and Paths to Reproducibility"**
 
-📄 [Paper](https://arxiv.org/abs/2504.07086v1)  
+📄 [Paper](https://arxiv.org/abs/2504.07086)  
 📊 [Leaderboard](https://bethgelab.github.io/sober-reasoning/)  
 🧪 [HuggingFace Dataset Page](https://huggingface.co/datasets/bethgelab/sober_reasoning)
 
@@ -59,22 +58,15 @@ Replace `--task` with the appropriate benchmark specification (e.g., `aime24`, `
    bash run.sh
    ```
 
-## 📥 Coming Soon
-
-- Pre-built Docker image on Docker Hub
-- Code to recreate the plots in the paper
-
 ## 🔄 Citation
 
 ```bibtex
-@misc{hochlehnert2025soberreasoning,
-      title={A Sober Look at Progress in Language Model Reasoning: Pitfalls and Paths to Reproducibility}, 
-      author={Andreas Hochlehnert and Hardik Bhatnagar and Vishaal Udandarao and Samuel Albanie and Ameya Prabhu and Matthias Bethge},
-      year={2025},
-      eprint={2504.07086},
-      archivePrefix={arXiv},
-      primaryClass={cs.LG},
-      url={https://arxiv.org/abs/2504.07086}, 
+@inproceedings{hochlehnert2025soberreasoning,
+    title={A Sober Look at Progress in Language Model Reasoning: Pitfalls and Paths to Reproducibility},
+    author={Andreas Hochlehnert and Hardik Bhatnagar and Vishaal Udandarao and Samuel Albanie and Ameya Prabhu and Matthias Bethge},
+    booktitle={Second Conference on Language Modeling},
+    year={2025},
+    url={https://openreview.net/forum?id=90UrTTxp5O}
 }
 ```
 
