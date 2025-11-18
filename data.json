@@ -844,9 +844,9 @@
     "name": "Qwen2.5-7B-DPO-VP",
     "organization": "SunnyLin",
     "baseModel": "Qwen2.5-Math-7B",
+    "technique": "RL",
     "paperLink": "https://arxiv.org/abs/2503.12854",
     "paperText": "",
-    "technique": "RL",
     "aime24": "18.7±6.9",
     "aime25": "9.3±4.4",
     "amc23": "59.7±6.1",
@@ -858,9 +858,9 @@
     "name": "Efficient_CoT_DeepSeek-R1-Distill-Qwen-7B",
     "organization": "Jianshu001",
     "baseModel": "DeepSeek-R1-Distill-Qwen-7B",
+    "technique": "RL",
     "paperLink": "https://arxiv.org/pdf/2504.00424",
     "paperText": "",
-    "technique": "RL",
     "aime24": "23.0±5.1",
     "aime25": "17.3±3.1",
     "amc23": "59.2±5.4",
@@ -868,10 +868,11 @@
     "minerva": "33.2±2.2",
     "olympiad": "41.5±1.0"
   },
-    {
+  {
     "name": "QuestA-Nemotron-1.5B",
     "organization": "foreverlasting1202",
     "baseModel": "OpenMath-Nemotron-1.5B",
+    "technique": "RL",
     "paperLink": "https://www.arxiv.org/pdf/2507.13266",
     "paperText": "",
     "aime24": "76.0±4.1",
@@ -880,5 +881,49 @@
     "math500": "92.7±1.0",
     "minerva": "28.4±1.5",
     "olympiad": "73.7±0.7"
-  }
+  },
+
+  {
+    "name": "JustRL-DeepSeek-1.5B",
+    "organization": "hbx",
+    "baseModel": "DeepSeek-R1-Distill-Qwen-1.5B",
+    "technique": "RL",
+    "paperLink": "https://relieved-cafe-fe1.notion.site/JustRL-Scaling-a-1-5B-LLM-with-a-Simple-RL-Recipe-24f6198b0b6b80e48e74f519bfdaf0a8",
+    "paperText": "Blog",
+    "aime24": "43.3±5.4",
+    "aime25": "32.7±4.9",
+    "amc23": "88.0±5.0",
+    "math500": "87.7±0.6",
+    "minerva": "31.9±0.2",
+    "olympiad": "50.4±0.6"
+  },
+  
+  {
+    "name": "JustRL-Nemotron-1.5B",
+    "organization": "hbx",
+    "baseModel": "OpenMath-Nemotron-1.5B",
+    "technique": "RL",
+    "paperLink": "https://relieved-cafe-fe1.notion.site/JustRL-Scaling-a-1-5B-LLM-with-a-Simple-RL-Recipe-24f6198b0b6b80e48e74f519bfdaf0a8",
+    "paperText": "Blog",
+    "aime24": "69.7±4.0",
+    "aime25": "55.7±3.9",
+    "amc23": "96.0±2.4",
+    "math500": "93.1±0.4",
+    "minerva": "26.2±0.8",
+    "olympiad": "73.0±0.6"
+  },
+  {
+    "name": "VibeThinker-1.5B",
+    "organization": "WeiboAI",
+    "baseModel": "Qwen2.5-Math-1.5B",
+    "technique": "RL",
+    "paperLink": "https://arxiv.org/abs/2511.06221",
+    "paperText": "",
+    "aime24": "75.7±3.9",
+    "aime25": "71.3±7.7",
+    "amc23": "96.5±2.1",
+    "math500": "96.7±0.5",
+    "minerva": "41.5±1.3",
+    "olympiad": "77.2±0.2"
+  } 
 ]
